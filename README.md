@@ -1,35 +1,69 @@
-# Discord Musik Bot
+# GRadio - Discord Radio Bot
 
-Ein Discord Bot zum Abspielen von Musik von YouTube, Spotify und SoundCloud.
+Ein Discord-Bot, der verschiedene deutsche Radiosender in deinem Sprachkanal abspielen kann.
+
+## Features
+
+- Spielt verschiedene deutsche Radiosender über Discord-Sprachkanäle ab
+- Einfache Bedienung über Discord Slash-Commands
+- Aktuell verfügbare Sender: Energy, KissFM, SunshineLive, 104.6 RTL, SWR3
+
+## Voraussetzungen
+
+- Python 3.8 oder höher
+- FFmpeg (muss im System-Pfad verfügbar sein)
+- Discord Bot Token
+- Die Pakete aus der `requirements.txt`
 
 ## Installation
 
-1. Installiere die Abhängigkeiten:
-```bash
-pip install -r requirements.txt
+1. Repository klonen oder herunterladen
+2. FFmpeg installieren:
+   - Windows: [FFmpeg Download](https://ffmpeg.org/download.html)
+   - Linux: `sudo apt-get install ffmpeg`
+   - macOS: `brew install ffmpeg`
+3. Python-Abhängigkeiten installieren:
+   ```
+   pip install -r requirements.txt
+   ```
+4. Bot-Token in `main.py` eintragen:
+   ```python
+   TOKEN = "DEIN_BOT_TOKEN_HIER"  # Ersetze mit deinem Discord Bot Token
+   ```
+
+## Bot-Einrichtung
+
+1. Gehe zum [Discord Developer Portal](https://discord.com/developers/applications)
+2. Erstelle eine neue Application und einen Bot
+3. Aktiviere die folgenden Intents:
+   - MESSAGE CONTENT INTENT
+   - SERVER MEMBERS INTENT
+4. Kopiere den Bot-Token und füge ihn in `main.py` ein
+5. Lade den Bot zu deinem Server ein mit den folgenden Berechtigungen:
+   - Bot
+   - applications.commands
+   - Connect (Sprachkanäle)
+   - Speak (Sprachkanäle)
+
+## Bot starten
+
+```
+python main.py
 ```
 
-2. Installiere Lavalink (Java 11 oder höher erforderlich):
-- Lade Lavalink.jar von [GitHub](https://github.com/freyacodes/Lavalink/releases) herunter
-- Erstelle eine `application.yml` Datei mit der Standardkonfiguration
-- Starte Lavalink mit: `java -jar Lavalink.jar`
+## Befehle
 
-3. Konfiguriere die Umgebungsvariablen:
-- Kopiere die `.env.example` zu `.env`
-- Füge deine API-Tokens ein:
-  - Discord Bot Token
-  - Spotify Client ID und Secret
-  - SoundCloud Client ID
+- `/radio [sender]` - Spielt den ausgewählten Radiosender ab
+- `/stop` - Stoppt das Radio und trennt den Bot vom Sprachkanal
+- `/list` - Zeigt alle verfügbaren Radiosender an
 
-4. Starte den Bot:
-```bash
-python bot.py
+## Neue Sender hinzufügen
+
+Um neue Sender hinzuzufügen, bearbeite das `RADIO_STATIONS`-Dictionary in `main.py`:
+
+```python
+RADIO_STATIONS = {
+    "Sendername": "Stream-URL",
+    # Weitere Sender...
+}
 ```
-
-## Verfügbare Befehle
-
-- `/play <name/link>` - Spielt einen Song ab
-- `/stop` - Stoppt die Wiedergabe
-- `/pause` - Pausiert die Wiedergabe
-- `/resume` - Setzt die Wiedergabe fort
-- `/disconnect` - Trennt den Bot vom Voice Channel
