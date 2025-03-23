@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from discord import option
+from discord.commands import option
 import asyncio
 import yt_dlp
 
